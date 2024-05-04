@@ -1,17 +1,3 @@
-### Hi there 👋
-transaction_id	customer_id	product_id	quantity	unit_price	timestamp
-1	101	1	2	10.99	2023-01-01 08:30:00
-2	102	3	1	5.99	2023-01-01 09:45:00
-3	103	2	3	8.99	2023-01-02 10:15:00
-4	104	1	1	10.99	2023-01-02 12:30:00
-5	105	4	2	15.99	2023-01-03 14:45:00
-6	106	3	1	5.99	2023-01-04 16:00:00
-7	107	2	3	8.99	2023-01-04 18:15:00
-8	108	1	1	10.99	2023-01-05 20:30:00
-9	109	4	2	15.99	2023-01-06 22:45:00
-10	110	3	1	5.99	2023-01-07 01:00:00
-
-
 
 import java.sql.*;
 
@@ -117,17 +103,3 @@ public class SalesAnalysis {
         
     }
 }
-<!--
-**nnam0801/nnam0801** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
-
-Here are some ideas to get you started:
-
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
