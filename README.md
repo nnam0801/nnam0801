@@ -1,66 +1,15 @@
 ### Hi there 👋
-import java.sql.SQLException;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.sql.DriverManager;
-
-public class Main {
-
-	private static String driverClass = "org.apache.hive.jdbc.HiveDriver";
-
-	public static void main(String[] args) throws SQLException {
-
-		try {
-			Class.forName(driverClass);
-		} catch (ClassNotFoundException exception) {
-
-			exception.printStackTrace();
-			System.exit(1);
-		}
-		Connection con = DriverManager.getConnection("jdbc:hive2://localhost:10000/default", "", "");
-		Statement stmt = con.createStatement();
-
-		String tableName = "data";
-		stmt.execute("drop table " + tableName);
-		stmt.execute("create table " + tableName + " (city string, temperature int) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' STORED AS TEXTFILE");
-
-		// show tables
-		String sql = "show tables '" + tableName + "'";
-		System.out.println("Running: " + sql);
-		ResultSet res = stmt.executeQuery(sql);
-		if (res.next()) {
-			System.out.println(res.getString(1));
-		}
-
-		// describe table
-		sql = "describe " + tableName;
-		System.out.println("Running: " + sql);
-		res = stmt.executeQuery(sql);
-		while (res.next()) {
-			System.out.println(res.getString(1) + "\t" + res.getString(2));
-		}
-
-		// load data into table
-		String filepath = "/home/cloudera/Desktop/data.csv";
-		sql = "load data local inpath '" + filepath + "' into table "
-				+ tableName;
-		System.out.println("Running: " + sql);
-		stmt.execute(sql);
-
-		// select * query
-		sql = "select * from " + tableName;
-		System.out.println("Running: " + sql);
-		res = stmt.executeQuery(sql);
-		while (res.next()) {
-			System.out.println(String.valueOf(res.getString(1)) + "\t"
-					+ res.getInt(2));
-		}
-
-		stmt.close();
-		con.close();
-	}
-}
+transaction_id,customer_id,product_id,quantity,unit_price,timestamp
+1,101,1,2,10.99,2023-01-01 08:30:00
+2,102,3,1,5.99,2023-01-01 09:45:00
+3,103,2,3,8.99,2023-01-02 10:15:00
+4,104,1,1,10.99,2023-01-02 12:30:00
+5,105,4,2,15.99,2023-01-03 14:45:00
+6,106,3,1,5.99,2023-01-04 16:00:00
+7,107,2,3,8.99,2023-01-04 18:15:00
+8,108,1,1,10.99,2023-01-05 20:30:00
+9,109,4,2,15.99,2023-01-06 22:45:00
+10,110,3,1,5.99,2023-01-07 01:00:00
 <!--
 **nnam0801/nnam0801** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
