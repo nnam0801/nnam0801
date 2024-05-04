@@ -1,21 +1,66 @@
 ### Hi there 👋
-1391102617,1234,http://quicloud.com/,http://google.com/,198.211.110.9
-1391101111,1234,http://somewhere.com/,http://google.com/,197.211.110.9
-1391002637,1222,http://uniquesite.com/,http://yahoo.com/,196.211.110.9
-1391002617,1221,http://quicloud.com/,http://bing.com/,198.211.110.9
-1387302617,1272,http://uniquepagewebsitepage.com/,http://bing.com/,192
-.168.1.1
-1387202617,1273,http://rarewebpagesitepage.com/,http://bing.com/,197.2
-11.110.9
-1389402617,1251,http://uniquesite.com/,http://ebay.com/,192.168.1.1
-1389502617,1272,http://uniquewebsite.com/,http://pinterest.com/,198.21
-1.110.9
-1390902617,1235,http://example.com/quicloud,http://google.com/,192.168
-.1.1
-1390802617,1272,http://quicloud.com/page1,http://yahoo.com/,172.16.0.1
-1390502617,1239,http://example.com/page1/quicloud,http://yahoo.com/,19
-2.168.1.1
-1389502617,1249,http://example.com/,http://bing.com/,197.211.110.9
+import java.sql.SQLException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.sql.DriverManager;
+
+public class Main {
+
+	private static String driverClass = "org.apache.hive.jdbc.HiveDriver";
+
+	public static void main(String[] args) throws SQLException {
+
+		try {
+			Class.forName(driverClass);
+		} catch (ClassNotFoundException exception) {
+
+			exception.printStackTrace();
+			System.exit(1);
+		}
+		Connection con = DriverManager.getConnection("jdbc:hive2://localhost:10000/default", "", "");
+		Statement stmt = con.createStatement();
+
+		String tableName = "data";
+		stmt.execute("drop table " + tableName);
+		stmt.execute("create table " + tableName + " (city string, temperature int) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' STORED AS TEXTFILE");
+
+		// show tables
+		String sql = "show tables '" + tableName + "'";
+		System.out.println("Running: " + sql);
+		ResultSet res = stmt.executeQuery(sql);
+		if (res.next()) {
+			System.out.println(res.getString(1));
+		}
+
+		// describe table
+		sql = "describe " + tableName;
+		System.out.println("Running: " + sql);
+		res = stmt.executeQuery(sql);
+		while (res.next()) {
+			System.out.println(res.getString(1) + "\t" + res.getString(2));
+		}
+
+		// load data into table
+		String filepath = "/home/cloudera/Desktop/data.csv";
+		sql = "load data local inpath '" + filepath + "' into table "
+				+ tableName;
+		System.out.println("Running: " + sql);
+		stmt.execute(sql);
+
+		// select * query
+		sql = "select * from " + tableName;
+		System.out.println("Running: " + sql);
+		res = stmt.executeQuery(sql);
+		while (res.next()) {
+			System.out.println(String.valueOf(res.getString(1)) + "\t"
+					+ res.getInt(2));
+		}
+
+		stmt.close();
+		con.close();
+	}
+}
 <!--
 **nnam0801/nnam0801** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
