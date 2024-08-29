@@ -1,105 +1,53 @@
+<div align="center">
+<img src="https://user-images.githubusercontent.com/74038190/225813708-98b745f2-7d22-48cf-9150-083f1b00d6c9.gif" align="center" style="width: 75%" />
+</div>
 
-import java.sql.*;
+---
 
-public class SalesAnalysis {
-    public static void main(String[] args) {
-        String driverName = "org.apache.hive.jdbc.HiveDriver";
-        String url = "jdbc:hive2://localhost:10000/default";
-        String username = "";
-        String password = "";
-        try {
-            Class.forName(driverName);
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement stmt = conn.createStatement();
-            // Thực hiện truy vấn Hive để lấy tổng doanh số bán hàng trong mỗi ngày/tháng/năm
-            String query = "SELECT SUBSTR(timestamp, 1, 10) AS sale_date, " +
-                           "SUM(quantity * unit_price) AS total_sales " +
-                           "FROM transactions " +
-                           "GROUP BY SUBSTR(timestamp, 1, 10)";
-            ResultSet rs = stmt.executeQuery(query);
-            // In ra kết quả
-            System.out.println("Doanh số bán hàng theo ngày:");
-            while (rs.next()) {
-                String saleDate = rs.getString("sale_date");
-                double totalSales = rs.getDouble("total_sales");
-                System.out.println(saleDate + ": " + totalSales);
-            }
-            rs.close();
-            stmt.close();
-            conn.close();
-        } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
-        }
-   // Thực hiện truy vấn Hive để đếm số lượng giao dịch trong mỗi ngày/tháng/năm
-            String query = "SELECT SUBSTR(timestamp, 1, 10) AS transaction_date, " +
-                           "COUNT(*) AS transaction_count " +
-                           "FROM transactions " +
-                           "GROUP BY SUBSTR(timestamp, 1, 10)";
-            ResultSet rs = stmt.executeQuery(query);
-            // In ra kết quả
-            System.out.println("Số lượng giao dịch theo ngày:");
-            while (rs.next()) {
-                String transactionDate = rs.getString("transaction_date");
-                int transactionCount = rs.getInt("transaction_count");
-                System.out.println(transactionDate + ": " + transactionCount);
-            }
-  // Thực hiện truy vấn Hive để đếm số lượng giao dịch cho mỗi sản phẩm
-            String query = "SELECT product_id, COUNT(*) AS transaction_count " +
-                           "FROM transactions " +
-                           "GROUP BY product_id " +
-                           "ORDER BY transaction_count DESC " +
-                           "LIMIT 10";
-            ResultSet rs = stmt.executeQuery(query);
-            // In ra top 10 sản phẩm bán chạy nhất
-            System.out.println("Top 10 sản phẩm bán chạy nhất:");
-            while (rs.next()) {
-                int productId = rs.getInt("product_id");
-                int transactionCount = rs.getInt("transaction_count");
-                System.out.println("Product ID: " + productId + ", Số lượng giao dịch: " + transactionCount);
-            }
-              // Thực hiện truy vấn Hive để tính tổng chi tiêu của mỗi khách hàng
-            String query = "SELECT customer_id, SUM(quantity * unit_price) AS total_spent " +
-                           "FROM transactions " +
-                           "GROUP BY customer_id " +
-                           "ORDER BY total_spent DESC " +
-                           "LIMIT 10";
-            ResultSet rs = stmt.executeQuery(query);
-            // In ra top 10 khách hàng có chi tiêu cao nhất
-            System.out.println("Top 10 khách hàng có chi tiêu cao nhất:");
-            while (rs.next()) {
-                int customerId = rs.getInt("customer_id");
-                double totalSpent = rs.getDouble("total_spent");
-                System.out.println("Customer ID: " + customerId + ", Tổng chi tiêu: " + totalSpent);
-            }
- // Thực hiện truy vấn Hive để lấy ra sản phẩm có doanh số cao nhất trong mỗi tháng
-            String query = "SELECT month(timestamp) AS month, product_id, SUM(quantity * unit_price) AS total_sales " +
-                           "FROM transactions " +
-                           "GROUP BY month(timestamp), product_id";
-            ResultSet rs = stmt.executeQuery(query);
-            // Tạo một bảng tạm thời để lưu trữ sản phẩm có doanh số cao nhất trong mỗi tháng
-            int[] maxProductId = new int[12]; // 12 tháng trong năm
-            double[] maxTotalSales = new double[12];
-            // Khởi tạo giá trị ban đầu cho bảng tạm thời
-            for (int i = 0; i < 12; i++) {
-                maxProductId[i] = -1; // Không có sản phẩm nào được chọn ban đầu
-                maxTotalSales[i] = 0.0; // Doanh số ban đầu là 0
-            }
-            // Lặp qua kết quả truy vấn để chọn sản phẩm có doanh số cao nhất trong mỗi tháng
-            while (rs.next()) {
-                int month = rs.getInt("month") - 1; // Chỉ số mảng bắt đầu từ 0
-                int productId = rs.getInt("product_id");
-                double totalSales = rs.getDouble("total_sales");
-                if (totalSales > maxTotalSales[month]) {
-                    maxProductId[month] = productId;
-                    maxTotalSales[month] = totalSales;
-                }
-            }
-            // In ra sản phẩm có doanh số cao nhất trong mỗi tháng
-            for (int i = 0; i < 12; i++) {
-                if (maxProductId[i] != -1) {
-                    System.out.println("Tháng " + (i + 1) + ": Sản phẩm " + maxProductId[i] + ", Doanh số: " + maxTotalSales[i]);
-                }
-            }
-        
-    }
-}
+## 🚀 About Me
+<table><tr><td valign="top" width="50%">
+
+- 🔭 I'm currently working on **WEDOCS, FlyWP, WPUF, weMail, Subscribe2, WPERP, WEBOT, Promo-Manager, Dokan, CartPulse, WP Project Manager...**
+
+- 🌱 I'm currently working on **Automation** using **Playwright**
+
+- 👯 I'm looking to collaborate on **Software Automation Testing, Software Testing Process, Project Management**
+
+- 💬 Ask me about **SQA, Automation, SDET, Project Management, Software Testing Process**
+
+- 📫 How to reach me: Email me @, **ratul01047@gmail.com**
+
+- ⚡ Favourite Quote **'_I belong to the warrior in whom the old ways have joined the new._'**
+
+</td><td valign="top" width="50%">
+
+<div align="center">
+<img src="https://media.giphy.com/media/qgQUggAC3Pfv687qPC/giphy.gif" align="center" style="width: 100%" />
+</div></td></tr></table>
+
+---
+
+<h3 align="left">Connect with me:</h3>
+<p align="left">
+<a href="https://twitter.com/https://twitter.com/ratzzzatouille" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/twitter.svg" alt="https://twitter.com/ratzzzatouille" height="30" width="40" /></a>
+<a href="https://linkedin.com/in/https://www.linkedin.com/in/nurul-amin-ratul/" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="https://www.linkedin.com/in/nurul-amin-ratul/" height="30" width="40" /></a>
+</p>
+
+---
+
+<h3 align="left">Languages and Tools:</h3>
+<p align="left"> <a href="https://www.cypress.io" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/simple-icons/simple-icons/6e46ec1fc23b60c8fd0d2f2ff46db82e16dbd75f/icons/cypress.svg" alt="cypress" width="40" height="40"/> </a> <a href="https://www.docker.com/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original-wordmark.svg" alt="docker" width="40" height="40"/> </a> <a href="https://dotnet.microsoft.com/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/dot-net/dot-net-original-wordmark.svg" alt="dotnet" width="40" height="40"/> </a> <a href="https://www.figma.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/figma/figma-icon.svg" alt="figma" width="40" height="40"/> </a> <a href="https://git-scm.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg" alt="git" width="40" height="40"/> </a> <a href="https://www.adobe.com/in/products/illustrator.html" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/adobe_illustrator/adobe_illustrator-icon.svg" alt="illustrator" width="40" height="40"/> </a> <a href="https://www.invisionapp.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/invisionapp/invisionapp-icon.svg" alt="invision" width="40" height="40"/> </a> <a href="https://www.java.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg" alt="java" width="40" height="40"/> </a> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" width="40" height="40"/> </a> <a href="https://jestjs.io" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/jestjsio/jestjsio-icon.svg" alt="jest" width="40" height="40"/> </a> <a href="https://www.linux.org/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/linux/linux-original.svg" alt="linux" width="40" height="40"/> </a> <a href="https://www.mysql.com/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original-wordmark.svg" alt="mysql" width="40" height="40"/> </a> <a href="https://www.oracle.com/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/oracle/oracle-original.svg" alt="oracle" width="40" height="40"/> </a> <a href="https://postman.com" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/getpostman/getpostman-icon.svg" alt="postman" width="40" height="40"/> </a> <a href="https://github.com/puppeteer/puppeteer" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/pptrdev/pptrdev-official.svg" alt="puppeteer" width="40" height="40"/> </a> <a href="https://www.selenium.dev" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/detain/svg-logos/780f25886640cef088af994181646db2f6b1a3f8/svg/selenium-logo.svg" alt="selenium" width="40" height="40"/> </a> <a href="https://www.typescriptlang.org/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg" alt="typescript" width="40" height="40"/> </a> </p>
+
+---
+
+<p align="left"> <a href="https://github.com/ryo-ma/github-profile-trophy"><img src="https://github-profile-trophy.vercel.app/?username=rat01047" alt="rat01047" /></a></p>
+
+---
+
+![](http://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=Rat01047&theme=monokai)
+![](http://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=Rat01047&theme=monokai) ![](http://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=Rat01047&theme=monokai)
+![](http://github-profile-summary-cards.vercel.app/api/cards/stats?username=Rat01047&theme=monokai) ![](http://github-profile-summary-cards.vercel.app/api/cards/productive-time?username=Rat01047&theme=monokai&utcOffset=6)  
+
+
+<img src="https://github.com/punitkmryh/punitkmryh/raw/master/wave.svg" style="max-width: 100%;">
+      
