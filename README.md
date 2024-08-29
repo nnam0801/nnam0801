@@ -29,7 +29,7 @@
 
 <h3 align="left">Connect with me:</h3>
 <p align="left">
-<a href="https://www.facebook.com/nam.nhuyen.7334" target="blank"><img align="center" src="https://i.pinimg.com/originals/ee/28/3a/ee283a1348a90c6db74c2937493fce74.png" height="30" width="40" /></a>
+<a href="https://www.facebook.com/nam.nhuyen.7334" target="blank"><img align="center" src="https://i.pinimg.com/originals/ee/28/3a/ee283a1348a90c6db74c2937493fce74.png" height="30" width="30" /></a>
 </p>
 
 ---
