@@ -7,17 +7,17 @@
 ## 🚀 About Me
 <table><tr><td valign="top" width="50%">
 
-- 🔭 I'm currently working on **WEDOCS, FlyWP, WPUF, weMail, Subscribe2, WPERP, WEBOT, Promo-Manager, Dokan, CartPulse, WP Project Manager...**
+- 🔭 Tôi hiện đang học tại **Đại học mỏ địa chất**
 
-- 🌱 I'm currently working on **Automation** using **Playwright**
+- 🌱 Tôi hiện đang học **Khoa công nghệ thông tin - Chuyên ngành khoa học máy tính**
 
-- 👯 I'm looking to collaborate on **Software Automation Testing, Software Testing Process, Project Management**
+- 👯 Tôi đang hướng tới **Software Automation Testing, Software Testing Process, Project Management**
 
-- 💬 Ask me about **SQA, Automation, SDET, Project Management, Software Testing Process**
+- 💬 Hỏi tôi **SQA, Automation, SDET, Project Management, Software Testing Process**
 
-- 📫 How to reach me: Email me @, **ratul01047@gmail.com**
+- 📫 Cách liên hệ : Email @, **risevil081@gmail.com**
 
-- ⚡ Favourite Quote **'_I belong to the warrior in whom the old ways have joined the new._'**
+- ⚡ Câu nói yêu thích **'_I belong to the warrior in whom the old ways have joined the new._'**
 
 </td><td valign="top" width="50%">
 
